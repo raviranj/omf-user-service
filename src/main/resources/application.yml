@@ -1,0 +1,12 @@
+server:
+  port: 9098    #port number
+ 
+spring:
+  application:
+    name: user-management-app     #service name
+    
+  cloud:
+    config:
+        uri:
+           - http://config:5098
+ 
