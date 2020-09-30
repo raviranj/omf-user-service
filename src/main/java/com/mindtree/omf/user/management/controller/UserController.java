@@ -75,6 +75,7 @@ public class UserController {
 	 */
 	@GetMapping(value = "/saveAnonymousUser", produces = MediaType.APPLICATION_JSON_VALUE)
 	public String saveAnonymousUser(@RequestBody UserDto userDto) {
+
 		service.createUser(userDto);
 		return "Anonymous User Created";
 	}
@@ -116,7 +117,9 @@ public class UserController {
 	@PreAuthorize("!hasAuthority('USER') || !hasAuthority('ADMIN')")
 	@PostMapping("/placeOrder")
 	public String saveOrder(@RequestBody UserOrderRequest orderDto) {
-		return service.saveOrder(orderDto);
+		log.info("inside save  method   for registered user " + orderDto.toString());
+		String saveOrder = service.saveOrder(orderDto);
+		return saveOrder;
 	}
 
 	/**
