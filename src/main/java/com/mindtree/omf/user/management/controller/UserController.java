@@ -114,10 +114,9 @@ public class UserController {
 	 * @param UserOrderRequest orderDto
 	 * @return string message deleted
 	 */
-	@PreAuthorize("!hasAuthority('USER') || !hasAuthority('ADMIN')")
 	@PostMapping("/placeOrder")
 	public String saveOrder(@RequestBody UserOrderRequest orderDto) {
-		log.info("inside save  method   for registered user " + orderDto.toString());
+		log.info("inside save  method   for registered user " + orderDto);
 		String saveOrder = service.saveOrder(orderDto);
 		return saveOrder;
 	}
@@ -133,6 +132,7 @@ public class UserController {
 	 */
 	@PostMapping("/anonymous/placeOrder")
 	public String saveOrderByanonymous(@RequestBody UserOrderRequest orderDto) {
+		log.info("inside save  method   for annonymous user " + orderDto);
 		return service.saveOrder(orderDto);
 	}
 
