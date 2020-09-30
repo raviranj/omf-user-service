@@ -101,7 +101,10 @@ public class UserServiceImpl implements UserService {
 				oderRequestDto.setUsername(omfUser.getName());
 				oderRequestDto.setPaymentType(userOrderRequest.getPaymentType());
 				oderRequestDto.setInstruction(userOrderRequest.getInstruction());
+				log.info("invoking  saveOrder from User Service  " + oderRequestDto);
 				String invokeOrderServiceToSaveOrder = invokeOrderServiceToSaveOrder(oderRequestDto);
+				log.info("reponse from orderservice  " + invokeOrderServiceToSaveOrder);
+				
 				if (invokeOrderServiceToSaveOrder != null) {
 					return "Order has sucessfully placed for the user " + omfUser.getName() + System.lineSeparator();
 				}
@@ -114,7 +117,7 @@ public class UserServiceImpl implements UserService {
 	@SuppressWarnings("unused")
 	private String saveOrder_Fallback(UserOrderRequest orderRequest) {
 		System.out.println("Search Service is down!!! fallback route enabled...");
-		return "CIRCUIT BREAKER ENABLED!!! No Response From Search Service at this moment.Sorry for inconvenience in placing Order "
+		return "CIRCUIT BREAKER ENABLED!!! No Response From Search Service/Order Service at this moment.Sorry for inconvenience in placing Order "
 				+ " Service will be back shortly - " + new Date();
 	}
 
